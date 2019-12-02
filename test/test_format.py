@@ -3,7 +3,7 @@ import sys
 import shutil
 import tempfile
 
-sys.path.append(path.join(path.dirname(__file__), '..\\viper'))
+sys.path.append(path.join(path.dirname(__file__), '../viper'))
 
 from viper import reader
 from viper.viper_formatter import load_formatter
