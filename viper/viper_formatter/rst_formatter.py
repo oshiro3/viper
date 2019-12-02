@@ -12,7 +12,7 @@ class Formatter:
         self.parser = RstParser()
 
     def format(self, function):
-        formatted_texts = self.format_texts(function)
+        formatted_texts = self._format_texts(function)
         return self._restruct(function, formatted_texts)
 
     def _restruct(self, function, strings) -> None:
@@ -41,7 +41,7 @@ class Formatter:
                         if '"""' in line or "'''" in line:
                             finished = True
 
-    def format_texts(self, func) -> deque:
+    def _format_texts(self, func) -> deque:
         def get_formatted_text(field):
             text = []
             for body in field:
