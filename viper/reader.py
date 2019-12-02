@@ -12,4 +12,3 @@ def extract_funcs(filename):
     program = open_file(filename)
     tree = ast.parse(program)
     return parse.create_function_details(tree)
-

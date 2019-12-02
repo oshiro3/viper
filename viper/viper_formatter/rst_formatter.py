@@ -6,19 +6,17 @@ from parsers.rst import RstParser
 
 
 class Formatter:
-    def __init__(self, file_path, * , dry_run=False):
+    def __init__(self, file_path, dry_run):
         self.file = file_path
-        self.dry_run = dry_run
+        self.dry_run = not dry_run
         self.parser = RstParser()
 
     def format(self, function):
         formatted_texts = self.format_texts(function)
         return self._restruct(function, formatted_texts)
 
-    def _restruct(
-            self, function, strings
-    ) -> None:
-        with fileinput.input(files=self.file, inplace=1) as f:
+    def _restruct(self, function, strings) -> None:
+        with fileinput.input(files=self.file, inplace=self.dry_run) as f:
             lines = function.docstring.count('\n') + 1
             finished = False
             for line in f:
@@ -29,9 +27,13 @@ class Formatter:
                     continue
                 if start_line <= n and n <= start_line + lines:
                     while strings:
-                        sys.stdout.write(
-                            '%s%s\n' % (' ' * (function.offset + 4), strings.popleft())
-                        )
+                        string = strings.popleft()
+                        if string is '':
+                            sys.stdout.write('\n')
+                        else:
+                            sys.stdout.write(
+                                '%s%s\n' % (' ' * (function.offset + 4), string)
+                            )
                 else:
                     if finished:
                         sys.stdout.write('%s' % line)
@@ -69,7 +71,9 @@ class Formatter:
                     t4 = []
                     for a in t2:
                         if a is not '':
-                            t4.append(a.replace('\n', '\n%s' % (' ' * (func.offset + 4))))
+                            t4.append(
+                                a.replace('\n', '\n%s' % (' ' * (func.offset + 4)))
+                            )
                     b.append(' '.join(t4))
         b.append("'''")
         return b

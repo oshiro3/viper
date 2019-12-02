@@ -16,7 +16,8 @@ class RstParser(Parser, parsers.rst.Parser):
     def parse(self, inputstring, a=None):
         components = (docutils.parsers.rst.Parser,)
         settings = docutils.frontend.OptionParser(
-            components=components).get_default_values()
+            components=components
+        ).get_default_values()
         document = docutils.utils.new_document('<rst-doc>', settings=settings)
         super(Parser, self).parse(inputstring, document)
         return document

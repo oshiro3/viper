@@ -28,7 +28,7 @@ if __name__ == '__main__':
     #
     funcs = reader.extract_funcs(file_path)
 
-    formatter = load_formatter.load(file_path)
+    formatter = load_formatter.load(file_path, dry_run=True)
 
     for func in funcs:
         formatter.format(func)
