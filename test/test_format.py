@@ -30,7 +30,9 @@ class TestGroup(object):
         file_path = path.join(
             path.dirname(path.abspath(__file__)), path.join('data', 'no_newline.py')
         )
-        test_path = tempfile.TemporaryFile().name
+        test_path = path.join(
+            path.dirname(path.abspath(__file__)), path.join('data', 'tmp', 'test1.py')
+        )
         shutil.copy(file_path, test_path)
         funcs = reader.extract_funcs(test_path)
 
@@ -47,7 +49,9 @@ class TestGroup(object):
         file_path = path.join(
             path.dirname(path.abspath(__file__)), path.join('data', 'has_newline_in_sentence.py')
         )
-        test_path = tempfile.NamedTemporaryFile().name
+        test_path = path.join(
+            path.dirname(path.abspath(__file__)), path.join('data', 'tmp', 'test2.py')
+        )
         shutil.copy(file_path, test_path)
         funcs = reader.extract_funcs(test_path)
 
