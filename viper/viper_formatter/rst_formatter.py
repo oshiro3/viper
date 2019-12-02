@@ -6,13 +6,13 @@ from parsers.rst import RstParser
 
 
 class Formatter:
-    def __init__(self, file_path, * , dry_run=False):
+    def __init__(self, file_path, *, dry_run=False):
         self.file = file_path
         self.dry_run = dry_run
         self.parser = RstParser()
 
     def format(self, function):
-        formatted_texts = self.format_texts(function)
+        formatted_texts = self._format_texts(function)
         return self._restruct(function, formatted_texts)
 
     def _restruct(
@@ -39,7 +39,7 @@ class Formatter:
                         if '"""' in line or "'''" in line:
                             finished = True
 
-    def format_texts(self, func) -> deque:
+    def _format_texts(self, func) -> deque:
         def get_formatted_text(field):
             text = []
             for body in field:

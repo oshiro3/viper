@@ -1,7 +1,7 @@
 from logging import getLogger, config, Logger
 from os import path
 from typing import Union
-import argparse
+# import argparse
 
 import reader
 from viper_formatter import load_formatter

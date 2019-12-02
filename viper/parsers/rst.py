@@ -1,8 +1,9 @@
-from typing import Any, Dict, List, Union, Type
+from typing import List, Type
 
-from docutils import parsers, frontend, utils
+from docutils import parsers
 from docutils.transforms import Transform, universal
 import docutils.parsers.rst
+
 
 from .parser import Parser
 
