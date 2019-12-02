@@ -28,7 +28,7 @@ expected = """def function(arg1, arg2, arg3):
 class TestGroup(object):
     def test_should_format_started_by_no_newline(self):
         file_path = path.join(
-            path.dirname(path.abspath(__file__)), "data/no_newline.py"
+            path.dirname(path.abspath(__file__)), path.join('data', 'no_newline.py')
         )
         test_path = tempfile.TemporaryFile().name
         shutil.copy(file_path, test_path)
@@ -45,9 +45,9 @@ class TestGroup(object):
     def test_should_format_has_remove_newline(self):
 
         file_path = path.join(
-            path.dirname(path.abspath(__file__)), "data/has_newline_in_sentence.py"
+            path.dirname(path.abspath(__file__)), path.join('data', 'has_newline_in_sentence.py')
         )
-        test_path = tempfile.TemporaryFile().name
+        test_path = tempfile.NamedTemporaryFile().name
         shutil.copy(file_path, test_path)
         funcs = reader.extract_funcs(test_path)
 
