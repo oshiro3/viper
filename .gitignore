@@ -126,3 +126,4 @@ dmypy.json
 
 # Project
 .idea/
+/test/data/tmp/

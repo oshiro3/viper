@@ -1,15 +1,14 @@
 from os import path
 import sys
 import shutil
-import tempfile
 
 sys.path.append(path.join(path.dirname(__file__), '../viper'))
 
 from viper import reader
 from viper.viper_formatter import load_formatter
 
-expected = """def function(arg1, arg2, arg3):
-    '''
+expected = '''def function(arg1, arg2, arg3):
+    """
     Hello, func
     korem ipsum dolor sit amet,
 
@@ -21,8 +20,8 @@ expected = """def function(arg1, arg2, arg3):
     :return: Return value
     :rtype: str or None
     :raises ValueError: if arg1 is empty string. only string.
-    '''
-    pass\n"""
+    """
+    pass\n'''
 
 
 class TestGroup(object):

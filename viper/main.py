@@ -23,7 +23,7 @@ if __name__ == '__main__':
     #     help='filename for the formatter',
     # )
     # args = parsers.parse_args()
-    file_path = path.join(path.dirname(path.abspath(__file__)), "../sample_2.py")
+    file_path = path.join(path.dirname(path.abspath(__file__)), "../sample_oneline.py")
     # if path.isfile(file_path):
     #
     funcs = reader.extract_funcs(file_path)
