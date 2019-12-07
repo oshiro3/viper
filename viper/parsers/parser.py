@@ -1,5 +1,3 @@
-
-from docutils import parsers
 import docutils.parsers.rst
 
 

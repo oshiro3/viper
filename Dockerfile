@@ -2,14 +2,13 @@ FROM python:3.7.5-alpine
 
 WORKDIR /viper
 
-RUN apk add bash gcc
+RUN apk --update-cache\
+            add bash\
+            gcc\
+            g++\
+            musl
 
-ADD test /viper/test
-ADD viper /viper/viper
-ADD .gitignore /viper
-ADD inspect.sh /viper
-ADD requirements.txt /viper
-ADD sample.py /viper
-ADD sample_2.py /viper
+COPY requirements.txt /viper
 
-#RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt
+ENTRYPOINT sh

@@ -74,15 +74,5 @@ def create_function_details(src: ast.AST) -> List[FunctionDetail]:
 
 
 if __name__ == "__main__":
-
-    filename = "../sample.py"
-    program = open_file(filename)
-    tree = ast.parse(program)
-    # print(tree)
-    y = create_function_details(tree)
-    for i in y:
-        logger.debug(i.line_number)
-        logger.debug(i.docstring)
-        # print(i.docstring)
-    # print(y)
-    # print(docstring)
+    # doctest
+    pass

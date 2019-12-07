@@ -5,33 +5,52 @@ from collections import deque
 from parsers.rst import RstParser
 
 
+def format_oneline(strings, line):
+    if strings:
+        while strings:
+            sys.stdout.write('%s' % strings.popleft())
+        else:
+            sys.stdout.write('\n')
+    if '"""' not in line:
+        sys.stdout.write('%s' % line)
+
+
 class Formatter:
-    def __init__(self, file_path, * , dry_run=False):
+    def __init__(self, file_path, dry_run):
         self.file = file_path
-        self.dry_run = dry_run
+        self.dry_run = not dry_run
         self.parser = RstParser()
 
     def format(self, function):
-        formatted_texts = self.format_texts(function)
+        formatted_texts = self._format_texts(function)
         return self._restruct(function, formatted_texts)
 
-    def _restruct(
-            self, function, strings
-    ) -> None:
-        with fileinput.input(files=self.file, inplace=1) as f:
+    def _restruct(self, function, strings) -> None:
+        with fileinput.input(files=self.file, inplace=self.dry_run) as f:
             lines = function.docstring.count('\n') + 1
             finished = False
+            first = True
             for line in f:
                 n = f.filelineno()
                 start_line = function.line_number
                 if n <= start_line:
                     sys.stdout.write('%s' % line)
                     continue
+                if lines == 1:
+                    if first:
+                        sys.stdout.write('%s' % (' ' * (function.offset + 4)))
+                        first = False
+                    format_oneline(strings, line)
+                    continue
                 if start_line <= n and n <= start_line + lines:
                     while strings:
-                        sys.stdout.write(
-                            '%s%s\n' % (' ' * (function.offset + 4), strings.popleft())
-                        )
+                        string = strings.popleft()
+                        if string is '':
+                            sys.stdout.write('\n')
+                        else:
+                            sys.stdout.write(
+                                '%s%s\n' % (' ' * (function.offset + 4), string)
+                            )
                 else:
                     if finished:
                         sys.stdout.write('%s' % line)
@@ -39,7 +58,7 @@ class Formatter:
                         if '"""' in line or "'''" in line:
                             finished = True
 
-    def format_texts(self, func) -> deque:
+    def _format_texts(self, func) -> deque:
         def get_formatted_text(field):
             text = []
             for body in field:
@@ -51,7 +70,7 @@ class Formatter:
 
         document = self.parser.parse(func.docstring, "")
         b = deque()
-        b.append("'''")
+        b.append('"""')
         first = True
         for t in document.children:
             for x in t:
@@ -69,7 +88,9 @@ class Formatter:
                     t4 = []
                     for a in t2:
                         if a is not '':
-                            t4.append(a.replace('\n', '\n%s' % (' ' * (func.offset + 4))))
+                            t4.append(
+                                a.replace('\n', '\n%s' % (' ' * (func.offset + 4)))
+                            )
                     b.append(' '.join(t4))
-        b.append("'''")
+        b.append('"""')
         return b
