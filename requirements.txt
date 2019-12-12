@@ -6,7 +6,7 @@ Click==7.0
 colander==0.9.9
 colorama==0.4.1
 docutils==0.15.2
-Flask==0.10.1
+Flask==1.0
 gitdb2==2.0.6
 GitPython==3.0.5
 importlib-metadata==0.23
