@@ -49,10 +49,10 @@ class Formatter:
                         first = False
                     format_oneline(strings, line)
                     continue
-                if start_line+ diff <= n and n <= (start_line + lines + diff):
+                if start_line + diff <= n and n <= (start_line + lines + diff):
                     while strings:
                         string = strings.popleft()
-                        if string is '':
+                        if string == '':
                             sys.stdout.write('\n')
                         else:
                             sys.stdout.write(
@@ -69,7 +69,7 @@ class Formatter:
         def get_formatted_text(field):
             text = []
             for body in field:
-                if body.tagname is 'field_name':
+                if body.tagname == 'field_name':
                     text.append(':%s:' % body.rawsource)
                 else:
                     text.append('%s' % body.rawsource.replace('\n', ' '))
@@ -94,7 +94,7 @@ class Formatter:
                     t2 = x.split(' ')
                     t4 = []
                     for a in t2:
-                        if a is not '':
+                        if a != '':
                             t4.append(
                                 a.replace('\n', '\n%s' % (' ' * (func.offset + 4)))
                             )

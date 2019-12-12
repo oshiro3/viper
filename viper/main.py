@@ -30,7 +30,5 @@ if __name__ == '__main__':
 
     formatter = load_formatter.load(file_path, dry_run=False)
 
-    diff = 0
-
     for i, func in enumerate(funcs, 1):
         formatter.format(i, func)
