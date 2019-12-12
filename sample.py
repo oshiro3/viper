@@ -11,7 +11,8 @@ def function(arg1, arg2, arg3):
     :type args3: dict[str, int]
     :return: Return value
     :rtype: str or None
-    :raises ValueError: if arg1 is empty string.
+    :raises ValueError: if arg1  is empty string.
+                            test
                             ok function
     """
     pass
@@ -28,6 +29,7 @@ def function2(arg1, arg2, arg3):
     :type args3: dict[str, int]
     :return: Return value
     :rtype: str or None
-    :raises ValueError: if arg1, is empty string.
+    :raises ValueError: if arg1,
+                            is empty string.
     """
     pass

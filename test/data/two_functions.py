@@ -1,6 +1,6 @@
 def function(arg1, arg2, arg3):
     """
-    Hello, func
+    Hello,    func
     korem ipsum dolor sit amet,
 
     :param string arg1: First argument
@@ -10,14 +10,15 @@ def function(arg1, arg2, arg3):
     :type args3: dict[str, int]
     :return: Return value
     :rtype: str or None
-    :raises ValueError: if arg1  is empty string. test ok function
+    :raises ValueError: if arg1  is empty string.
+                            test
+                            ok function
     """
     pass
 
 
 def function2(arg1, arg2, arg3):
-    """
-    OK, func
+    """ OK, func
     jonathan has dolor sit amet,
 
     :param string arg1: First argument
@@ -27,6 +28,7 @@ def function2(arg1, arg2, arg3):
     :type args3: dict[str, int]
     :return: Return value
     :rtype: str or None
-    :raises ValueError: if arg1, is empty string.
+    :raises ValueError: if arg1,
+                            is empty string.
     """
     pass

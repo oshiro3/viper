@@ -21,19 +21,26 @@ class Formatter:
         self.dry_run = not dry_run
         self.parser = RstParser()
 
-    def format(self, function, diff: int):
+    def format(self, index, function):
         formatted_texts = self._format_texts(function)
-        return self._restruct(function, formatted_texts, diff)
+        return self._restruct(function, formatted_texts, index)
 
-    def _restruct(self, function, strings: deque, diff: int) -> None:
+    def _restruct(self, function, strings: deque, func_count: int) -> None:
         with fileinput.input(files=self.file, inplace=self.dry_run) as f:
             lines = function.docstring.count('\n') + 1
             finished = False
             first = True
+            start_line = function.line_number
+            count = 1
+            diff = 0
             for line in f:
+                if 'def' in line:
+                    if count == func_count:
+                        # print('%d: %d' % (start_line, f.filelineno()))
+                        diff = f.filelineno() - start_line
+                    count += 1
                 n = f.filelineno()
-                start_line = function.line_number + diff
-                if n <= start_line:
+                if n <= start_line + diff:
                     sys.stdout.write('%s' % line)
                     continue
                 if lines == 1:
@@ -42,7 +49,7 @@ class Formatter:
                         first = False
                     format_oneline(strings, line)
                     continue
-                if start_line <= n and n <= start_line + lines:
+                if start_line+ diff <= n and n <= (start_line + lines + diff):
                     while strings:
                         string = strings.popleft()
                         if string is '':

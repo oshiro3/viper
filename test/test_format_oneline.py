@@ -25,8 +25,8 @@ class TestGroup(object):
 
         formatter = load_formatter.load(test_path)
 
-        for func in funcs:
-            formatter.format(func)
+        for i, func in enumerate(funcs, 1):
+            formatter.format(i, func)
         with open(test_path) as f:
             s = f.read()
             assert s == expected

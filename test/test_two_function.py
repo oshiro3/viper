@@ -19,7 +19,24 @@ expected = '''def function(arg1, arg2, arg3):
     :type args3: dict[str, int]
     :return: Return value
     :rtype: str or None
-    :raises ValueError: if arg1 is empty string. only string.
+    :raises ValueError: if arg1  is empty string. test ok function
+    """
+    pass
+
+
+def function2(arg1, arg2, arg3):
+    """
+    OK, func
+    jonathan has dolor sit amet,
+
+    :param string arg1: First argument
+    :param arg2: Second argument
+    :type args2: list[int]
+    :param arg3: Third argument
+    :type args3: dict[str, int]
+    :return: Return value
+    :rtype: str or None
+    :raises ValueError: if arg1, is empty string.
     """
     pass\n'''
 
@@ -27,7 +44,7 @@ expected = '''def function(arg1, arg2, arg3):
 class TestGroup(object):
     def test_should_format_started_by_no_newline(self):
         file_path = path.join(
-            path.dirname(path.abspath(__file__)), path.join('data', 'no_newline.py')
+            path.dirname(path.abspath(__file__)), path.join('data', 'two_functions.py')
         )
         test_path = path.join(
             path.dirname(path.abspath(__file__)), path.join('data', 'tmp', 'test.py')
@@ -43,21 +60,3 @@ class TestGroup(object):
             s = f.read()
             assert s == expected
 
-    def test_should_format_has_remove_newline(self):
-
-        file_path = path.join(
-            path.dirname(path.abspath(__file__)), path.join('data', 'has_newline_in_sentence.py')
-        )
-        test_path = path.join(
-            path.dirname(path.abspath(__file__)), path.join('data', 'tmp', 'test.py')
-        )
-        shutil.copy(file_path, test_path)
-        funcs = reader.extract_funcs(test_path)
-
-        formatter = load_formatter.load(test_path)
-
-        for i, func in enumerate(funcs, 1):
-            formatter.format(i, func)
-        with open(test_path) as f:
-            s = f.read()
-            assert s == expected
