@@ -16,23 +16,23 @@ def format_oneline(strings, line):
 
 
 class Formatter:
-    def __init__(self, file_path, dry_run):
+    def __init__(self, file_path: str, dry_run: bool):
         self.file = file_path
         self.dry_run = not dry_run
         self.parser = RstParser()
 
-    def format(self, function):
+    def format(self, function, diff: int):
         formatted_texts = self._format_texts(function)
-        return self._restruct(function, formatted_texts)
+        return self._restruct(function, formatted_texts, diff)
 
-    def _restruct(self, function, strings) -> None:
+    def _restruct(self, function, strings: deque, diff: int) -> None:
         with fileinput.input(files=self.file, inplace=self.dry_run) as f:
             lines = function.docstring.count('\n') + 1
             finished = False
             first = True
             for line in f:
                 n = f.filelineno()
-                start_line = function.line_number
+                start_line = function.line_number + diff
                 if n <= start_line:
                     sys.stdout.write('%s' % line)
                     continue
