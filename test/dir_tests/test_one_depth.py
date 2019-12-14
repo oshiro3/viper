@@ -5,7 +5,7 @@ import glob
 
 sys.path.append(path.join(path.dirname(__file__), '../../viper'))
 
-from viper import main
+from viper import viper
 
 expected = '''def function(arg1, arg2, arg3):
     """
@@ -41,7 +41,8 @@ class TestGroup(object):
         test_paths = [path.abspath(p) for p in glob.glob(dir_path)]
         shutil.copy(test_paths[0], test_path)
         shutil.copy(test_paths[1], test_path2)
-        main.main(dir_path)
+
+        viper.main(path.dirname(test_path))
 
         with open(test_path) as f:
             s = f.read()
