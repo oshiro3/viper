@@ -4,8 +4,7 @@ import shutil
 
 sys.path.append(path.join(path.dirname(__file__), '../viper'))
 
-from viper.engine.reader import reader
-from viper.engine.viper_formatter import load_formatter
+from viper import main
 
 expected = '''def function(arg1, arg2, arg3):
     """
@@ -33,12 +32,7 @@ class TestGroup(object):
             path.dirname(path.abspath(__file__)), path.join('data', 'tmp', 'test.py')
         )
         shutil.copy(file_path, test_path)
-        funcs = reader.extract_funcs(test_path)
-
-        formatter = load_formatter.load(test_path)
-
-        for i, func in enumerate(funcs, 1):
-            formatter.format(i, func)
+        main.main(test_path)
         with open(test_path) as f:
             s = f.read()
             assert s == expected
@@ -52,12 +46,7 @@ class TestGroup(object):
             path.dirname(path.abspath(__file__)), path.join('data', 'tmp', 'test.py')
         )
         shutil.copy(file_path, test_path)
-        funcs = reader.extract_funcs(test_path)
-
-        formatter = load_formatter.load(test_path)
-
-        for i, func in enumerate(funcs, 1):
-            formatter.format(i, func)
+        main.main(test_path)
         with open(test_path) as f:
             s = f.read()
             assert s == expected

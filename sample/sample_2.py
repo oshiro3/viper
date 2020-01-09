@@ -1,6 +1,6 @@
+
 def function(arg1, arg2, arg3):
-    """
-    Hello, func
+    """Hello,    func
     korem ipsum dolor sit amet,
 
     :param string arg1: First argument
@@ -11,5 +11,8 @@ def function(arg1, arg2, arg3):
     :return: Return value
     :rtype: str or None
     :raises ValueError: if arg1 is empty string.
+                            ok function
+                            hogehoge
     """
     pass
+
