@@ -4,8 +4,8 @@ import shutil
 
 sys.path.append(path.join(path.dirname(__file__), '../viper'))
 
-from viper import reader
-from viper.viper_formatter import load_formatter
+from viper.engine.reader import reader
+from viper.engine.viper_formatter import load_formatter
 
 expected = '''def function(arg1, arg2, arg3):
     """Hello, func"""

@@ -3,8 +3,7 @@ from os import path
 from typing import Union
 # import argparse
 
-import reader
-from viper_formatter import load_formatter
+from engine import engine
 
 
 def create_logger() -> Union[Logger]:
@@ -15,20 +14,22 @@ def create_logger() -> Union[Logger]:
 
 if __name__ == '__main__':
     # logger = create_logger()
-    # parsers = argparse.ArgumentParser(description='Process args')
-    # parsers.add_argument(
+    # parser = argparse.ArgumentParser(description='Process args')
+    # parser.add_argument(
     #     'filename',
     #     metavar='filename',
     #     # nargs='+',
     #     help='filename for the formatter',
     # )
-    # args = parsers.parse_args()
+    # args = parser.parse_args()
     file_path = path.join(path.dirname(path.abspath(__file__)), "../sample.py")
     # if path.isfile(file_path):
     #
-    funcs = reader.extract_funcs(file_path)
-
-    formatter = load_formatter.load(file_path, dry_run=False)
-
-    for i, func in enumerate(funcs, 1):
-        formatter.format(i, func)
+    engine = engine.load_engine('rst')
+    engine.run(file_path)
+    # funcs = reader.extract_funcs(file_path)
+    #
+    # formatter = load_formatter.load(file_path, dry_run=False)
+    #
+    # for i, func in enumerate(funcs, 1):
+    #     formatter.format(i, func)
