@@ -2,7 +2,7 @@ import fileinput
 import sys
 from collections import deque
 
-from parsers.rst import RstParser
+from ..parser.rst import RstParser
 
 
 def format_oneline(strings, line):
