@@ -4,7 +4,7 @@ attrs==19.3.0
 bandit==1.6.2
 black==19.10b0
 Click==7.0
-colander==0.9.9
+colander==1.7.0
 colorama==0.4.1
 docutils==0.15.2
 entrypoints==0.3
